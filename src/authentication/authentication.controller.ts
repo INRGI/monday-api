@@ -1,5 +1,4 @@
-import { Body, Controller, Get, HttpCode, Post, Req, Res, SerializeOptions, UseGuards, UseInterceptors } from "@nestjs/common";
-import {Response} from 'express';
+import { Body, Controller, Get, HttpCode, Post, Req, SerializeOptions, UseGuards } from "@nestjs/common";
 import { AuthenticationService } from "./authentication.service";
 import RegisterDTO from "./dto/register.dto";
 import { LocalAuthenticationGuard } from "./localAuthentication.guard";

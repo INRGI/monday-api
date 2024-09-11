@@ -1,4 +1,4 @@
-import { Injectable, Post } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
 import { UpdatePostDTO } from './dto/updatePost.dto';
 import { CreatePostDTO } from './dto/createPost.dto';
@@ -11,7 +11,7 @@ import { PostNotFoundException } from './exception/postNotFund.exception';
 @Injectable()
 export default class PostsService {
   constructor(
-    @InjectRepository(Post)
+    @InjectRepository(PostEntity)
     private postsRepository: Repository<PostEntity>,
   ) {}
 

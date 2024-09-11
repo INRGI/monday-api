@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 
 import { UsersService } from 'src/users/users.service';
 import RegisterDTO from './dto/register.dto';
