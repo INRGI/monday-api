@@ -21,18 +21,22 @@ import { CategoriesModule } from './categories/category.module';
         POSTGRES_DB: Joi.string().required(),
         JWT_SECRET: Joi.string().required(),
         JWT_EXPIRATION_TIME: Joi.string().required(),
+        JWT_REFRESH_TOKEN_SECRET: Joi.string().required(),
+        JWT_REFRESH_TOKEN_EXPIRATION_TIME: Joi.string().required(),
         PORT: Joi.number(),
       }),
     }),
     DatabaseModule,
     AuthenticationModule,
     UsersModule,
-    CategoriesModule
+    CategoriesModule,
   ],
   controllers: [],
-  providers: [{
-    provide: APP_FILTER,
-    useClass: ExceptionsLoggerFilter,
-  }],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: ExceptionsLoggerFilter,
+    },
+  ],
 })
 export class AppModule {}

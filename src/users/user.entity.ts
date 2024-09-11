@@ -27,6 +27,9 @@ class User{
 
     @OneToMany(()=> PostEntity, (post: PostEntity)=> post.author)
     public posts: PostEntity[]
+
+    @Exclude()
+    public currentHashedRefreshToken?: string;
 }
 
 export default User;
