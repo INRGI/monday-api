@@ -5,7 +5,7 @@ import { ExtractJwt } from "passport-jwt";
 import { Strategy } from "passport-local";
 import {Request} from 'express'
 import { UsersService } from "src/users/users.service";
-import { TokenPayload } from "./tokenPayload.interface";
+import { TokenPayload } from "../tokenPayload.interface";
 
 
 @Injectable()
