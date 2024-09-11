@@ -1,3 +1,4 @@
+import { Exclude, Expose } from "class-transformer";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 
@@ -7,12 +8,15 @@ class User{
     public id?: number;
 
     @Column({unique: true})
+    @Expose()
     public email: string;
 
+    @Expose()
     @Column()
     public name: string;
 
     @Column()
+    @Exclude()
     public password: string;
 }
 
