@@ -3,11 +3,12 @@ import * as bcrypt from 'bcrypt';
 import { UsersService } from 'src/users/users.service';
 import RegisterDTO from './dto/register.dto';
 import { PostgresErrorCode } from 'src/database/postgresErrorCodes.enum';
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { TokenPayload } from './tokenPayload.interface';
 
+@Injectable()
 export class AuthenticationService {
   constructor(
     private readonly usersService: UsersService,
@@ -16,18 +17,26 @@ export class AuthenticationService {
   ) {}
 
   public async register(registerData: RegisterDTO) {
+    console.log('Register Data:', registerData);
+  
     const hashedPassword = await bcrypt.hash(registerData.password, 10);
+    console.log('Hashed Password:', hashedPassword);
+  
     try {
       const createdUser = await this.usersService.create({
         ...registerData,
         password: hashedPassword,
       });
+      console.log('Created User:', createdUser);
+  
       createdUser.password = undefined;
       return createdUser;
     } catch (error) {
+      console.error('Registration Error:', error);
+  
       if (error?.code === PostgresErrorCode.UniqueViolation) {
         throw new HttpException(
-          'User with that email does not exist',
+          'User with that email already exists',
           HttpStatus.BAD_REQUEST,
         );
       }
