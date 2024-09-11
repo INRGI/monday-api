@@ -4,28 +4,32 @@ services:
     container_name: postgres
     image: postgres:latest
     ports:
-    - "5432:5432"
+      - "5432:5432"
     volumes:
-    - /data/postgres:/data/postgres
+      - postgres-data:/var/lib/postgresql/data
     env_file:
-    - docker.env
+      - docker.env
     networks:
-    - postgres
- 
+      - postgres
+
   pgadmin:
-    links:
-    - postgres:postgres
     container_name: pgadmin
     image: dpage/pgadmin4
     ports:
-    - "8080:80"
+      - "8080:80"
     volumes:
-    - /data/pgadmin:/root/.pgadmin
+      - pgadmin-data:/root/.pgadmin
     env_file:
-    - docker.env
+      - docker.env
     networks:
-    - postgres
- 
+      - postgres
+
 networks:
   postgres:
     driver: bridge
+
+volumes:
+  postgres-data:
+    driver: local
+  pgadmin-data:
+    driver: local
