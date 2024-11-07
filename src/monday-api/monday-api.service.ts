@@ -8,8 +8,8 @@ export class MondayApiService {
   private readonly mondayToken: string;
 
   constructor(private readonly configService: ConfigService) {
-    this.apiUrl = this.configService.get<string>('MONDAY_URL') || process.env.MONDAY_URL;
-    this.mondayToken = this.configService.get<string>('MONDAY_API_TOKEN') ||  process.env.MONDAY_API_TOKEN;
+    this.apiUrl = this.configService.get<string>('MONDAY_URL');
+    this.mondayToken = this.configService.get<string>('MONDAY_API_TOKEN');
   }
 
   private async getProductsItems(productName: string): Promise<any> {
