@@ -57,10 +57,11 @@ export class MondayApiService {
     } else {
       items = await this.getProductsItems(productName);
     }
-
+    
     const item = items.data.boards[0].items_page.items.find((item: any) =>
       item.name.toLowerCase().includes(productName.toLowerCase()),
     );
     return item;
   }
 }
+// NEED TO OPTIMIZE
