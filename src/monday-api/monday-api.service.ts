@@ -29,10 +29,10 @@ export class MondayApiService {
       }
     }
     `;
-  
+
     const variables = {
       boardId: 803747785,
-      value: productName 
+      value: productName,
     };
 
     const response = await axios.post(
@@ -44,17 +44,22 @@ export class MondayApiService {
           'Content-Type': 'application/json',
           'API-Version': '2023-07',
         },
-      }
+      },
     );
 
     return response.data;
   }
 
   async findProductByName(productName: string) {
-    const items = await this.getProductsItems(productName);
-    console.log(productName)
+    let items;
+    if (productName === 'RHEE') {
+      items = await this.getProductsItems(`*RHEE`);
+    } else {
+      items = await this.getProductsItems(productName);
+    }
+
     const item = items.data.boards[0].items_page.items.find((item: any) =>
-      item.name.toLowerCase().includes(productName.toLowerCase())
+      item.name.toLowerCase().includes(productName.toLowerCase()),
     );
     return item;
   }
