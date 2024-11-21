@@ -54,7 +54,11 @@ export class MondayApiService {
     let items;
     if (productName === 'RHEE') {
       items = await this.getProductsItems(`*RHEE`);
-    } else {
+    }
+    else if (productName === 'RHOB') {
+      items = await this.getProductsItems(`*RHOB`);
+    }
+    else {
       items = await this.getProductsItems(productName);
     }
     
